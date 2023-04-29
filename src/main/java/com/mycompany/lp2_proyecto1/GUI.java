@@ -15,8 +15,9 @@ public class GUI extends javax.swing.JFrame {
      */
     public GUI() {
         initComponents();
-        conexion objetoConexion =new conexion();
-        objetoConexion.establecerConexcion();
+        alumnos objetoAlumnos = new alumnos();
+        objetoAlumnos.MostrarAlumnos(tabla);
+   
     }
 
     /**
@@ -173,13 +174,13 @@ public class GUI extends javax.swing.JFrame {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(tabla);
