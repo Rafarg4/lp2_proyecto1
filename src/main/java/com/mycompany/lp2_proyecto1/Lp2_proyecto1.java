@@ -11,6 +11,9 @@ package com.mycompany.lp2_proyecto1;
 public class Lp2_proyecto1 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+String nombre = "Juan";
+String apellido = "Pérez";
+String nombreCompleto = nombre + " " + apellido;
+        System.out.println(nombreCompleto);
     }
 }

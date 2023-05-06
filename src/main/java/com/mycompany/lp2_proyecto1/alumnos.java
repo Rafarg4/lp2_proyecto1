@@ -116,7 +116,61 @@ public class alumnos {
             
         } catch(Exception e ){
             JOptionPane.showMessageDialog(null,"Error al mostrar los registros"+e.toString());
-        }
-        ''
+        }       
     }
-}
+      public void SelecionarAlumno(JTable paramtabla,JTextField paramid,JTextField paramnombre, 
+            JTextField paramapellido, JTextField paramedad,
+            JTextField paramdireccion){
+          try{
+          int fila = paramtabla.getSelectedRow();
+          if(fila>=0){
+           paramid.setText(paramtabla.getValueAt(fila,0).toString());
+           paramnombre.setText(paramtabla.getValueAt(fila,1).toString());
+           paramapellido.setText(paramtabla.getValueAt(fila,2).toString());
+           paramedad.setText(paramtabla.getValueAt(fila,3).toString());
+           paramdireccion.setText(paramtabla.getValueAt(fila,4).toString());
+          }else{
+           JOptionPane.showMessageDialog(null,"Error al seleccionar");
+          }
+          }catch(Exception e){
+               JOptionPane.showMessageDialog(null,"Error al seleccionar,error:"+e.toString());
+          }
+        }
+          public void Editar (JTextField paramid,JTextField paramnombre, 
+            JTextField paramapellido, JTextField paramedad,
+            JTextField paramdireccion){
+            setId(Integer.parseInt(paramid.getText()));
+            setNombre(paramnombre.getText());
+            setApellido(paramapellido.getText());
+            setEdad(paramedad.getText());
+            setDireccion(paramdireccion.getText());
+            conexion objetoConexion = new conexion();
+            String editar="UPDATE alumnos set alumnos.nombre=?, alumnos.apellido=?,alumnos.edad=?,alumnos.direccion=? where alumnos.id=?";
+            try{
+       CallableStatement cs = objetoConexion.establecerConexcion().prepareCall(editar);
+       cs.setString(1,getNombre());
+       cs.setString(2,getApellido());
+       cs.setString(3,getEdad());
+       cs.setString(4,getDireccion());
+       cs.setInt(5,getId());
+       cs.execute();
+        JOptionPane.showMessageDialog(null,"Se edito correctamente");
+            }catch(Exception e){
+        JOptionPane.showMessageDialog(null,"Error al editar, error:"+e.toString());
+                    }
+          }
+  public void eliminar(JTextField paramid){
+       conexion objetoConexion = new conexion();
+       setId(Integer.parseInt(paramid.getText()));
+       String eliminar="DELETE FROM alumnos WHERE id= ?";
+  try{
+ CallableStatement cs = objetoConexion.establecerConexcion().prepareCall(eliminar);
+       cs.setInt(1,getId());
+       cs.execute();
+        JOptionPane.showMessageDialog(null,"Eliminado correctamente");
+  }catch(Exception e){
+       JOptionPane.showMessageDialog(null,"Error al eliminar, error:"+e.toString());
+      } 
+    }
+  }
+
